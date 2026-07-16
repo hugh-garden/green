@@ -1,0 +1,9 @@
+/* single source of truth for colors — read into deck.gl layers via lib/cssColor.ts */
+:root {
+  --color-bg: #f2faf8;
+  --color-ocean: #9ed4cd;
+  --color-land-fill: #a8d8ae;
+  --color-land-stroke: #8fc09a;
+  --color-coastline: #1b6358;
+  --color-pin: #e8603c;
+}
