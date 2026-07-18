@@ -1,0 +1,6 @@
+/* fill the viewport minus the side panel — deck.gl attaches its canvas to this element */
+.globe-container {
+  position: fixed;
+  inset: 0;
+  right: var(--panel-width);
+}

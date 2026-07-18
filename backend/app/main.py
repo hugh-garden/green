@@ -3,6 +3,7 @@ import json
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from .climate import sample_climate
 from .config import CORS_ALLOW_ORIGINS, GEO_LAYERS
 
 app = FastAPI(title="green")
@@ -22,3 +23,9 @@ def get_geo_layer(layer_name: str) -> dict:
     if path is None:
         raise HTTPException(status_code=404, detail=f"Unknown layer: {layer_name}")
     return json.loads(path.read_text())
+
+
+# retrieve known climate data for a coordinate
+@app.get("/api/climate")
+def get_climate(lon: float, lat: float) -> dict:
+    return sample_climate(lon, lat)
