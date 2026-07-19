@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, useTemplateRef, watch } from 'vue'
+import { onMounted, onBeforeUnmount, useTemplateRef } from 'vue'
 import { Deck, _GlobeView as GlobeView, LinearInterpolator, type Layer } from '@deck.gl/core'
 import { createGeoLayers } from '../lib/geoLayers'
 import { createPinsLayer, type GeoPin } from '../lib/pins'
@@ -51,7 +51,10 @@ function flyToPin(pin: GeoPin) {
 async function handleContextMenu(event: MouseEvent) {
   event.preventDefault()
   const info = await deck?.pickObjectAsync({ x: event.offsetX, y: event.offsetY, layerIds: ['pins'] })
-  if (info?.object) removePin((info.object as GeoPin).id)
+  if (info?.object) {
+    removePin((info.object as GeoPin).id)
+    renderLayers()
+  }
 }
 
 // state/province name at a pixel, if the states layer has one there
@@ -74,7 +77,9 @@ async function handleDoubleClick(longitude: number, latitude: number, x: number,
   if (!country) return
 
   const [state, subunit] = await Promise.all([pickState(x, y), pickSubunit(x, y)])
-  flyToPin(addPin(longitude, latitude, country, state, subunit))
+  const pin = addPin(longitude, latitude, country, state, subunit)
+  renderLayers()
+  flyToPin(pin)
 }
 
 // mount the deck.gl globe once the container element exists
@@ -108,16 +113,18 @@ onMounted(async () => {
         handleDoubleClick(info.coordinate[0], info.coordinate[1], info.x, info.y)
         return
       }
-      // single click on a pin selects it, showing its data in the side panel
+      // single click on a pin selects it — recolor immediately, then ease the view over
       if (event.tapCount === 1 && info.layer?.id === 'pins' && info.object) {
-        selectPin((info.object as GeoPin).id)
+        const pin = info.object as GeoPin
+        selectPin(pin.id)
+        renderLayers()
+        flyToPin(pin)
       }
     },
     layers: [],
   })
 
   container.value?.addEventListener('contextmenu', handleContextMenu)
-  watch([pins, selectedPinId], renderLayers)
   renderLayers()
 })
 

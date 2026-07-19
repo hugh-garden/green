@@ -15,11 +15,15 @@ GEO_LAYERS = {
 # worldclim raster data directory
 CLIMATE_DIR = Path(__file__).resolve().parents[2] / "data" / "worldclim"
 
+# global solar atlas raster data directory
+SOLAR_DIR = Path(__file__).resolve().parents[2] / "data" / "solar-atlas"
+
 # maps a climate variable name to its compressed raster on disk
 CLIMATE_LAYERS = {
     "annual_mean_temp": CLIMATE_DIR / "annual_mean_temp.npz",
     "annual_precip": CLIMATE_DIR / "annual_precip.npz",
     "elevation": CLIMATE_DIR / "elevation.npz",
+    "ghi_annual": SOLAR_DIR / "ghi_annual.npz",
 }
 
 # origins allowed to call the API — just the vite dev server for now

@@ -6,6 +6,7 @@ export interface ClimateData {
   annual_mean_temp: number | null
   annual_precip: number | null
   elevation: number | null
+  ghi_annual: number | null
 }
 
 // fetch known climate data for a pinned coordinate
