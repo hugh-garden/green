@@ -9,12 +9,16 @@ import requests
 import shapefile
 
 
-# url spec
-BASE_URL = "https://naciscdn.org/naturalearth/110m"
+# url spec — 50m for every layer so boundaries share a resolution and line up with each other
+BASE_URL_50M = "https://naciscdn.org/naturalearth/50m"
 LAYERS = {
-    "countries": f"{BASE_URL}/cultural/ne_110m_admin_0_countries.zip",
-    "coastline": f"{BASE_URL}/physical/ne_110m_coastline.zip",
-    "ocean": f"{BASE_URL}/physical/ne_110m_ocean.zip",
+    "countries": f"{BASE_URL_50M}/cultural/ne_50m_admin_0_countries.zip",
+    "coastline": f"{BASE_URL_50M}/physical/ne_50m_coastline.zip",
+    "ocean": f"{BASE_URL_50M}/physical/ne_50m_ocean.zip",
+    # states/provinces — covers most subdivided countries (us, canada, ...)
+    "states": f"{BASE_URL_50M}/cultural/ne_50m_admin_1_states_provinces.zip",
+    # geographic subunits — catches countries admin_1 misses, e.g. splits the uk into its constituent nations
+    "subunits": f"{BASE_URL_50M}/cultural/ne_50m_admin_0_map_subunits.zip",
 }
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "natural-earth"
@@ -24,6 +28,8 @@ KEPT_PROPERTIES = {
     "countries": ["NAME", "ISO_A2", "ISO_A3", "CONTINENT"],
     "coastline": [],
     "ocean": [],
+    "states": ["name", "admin", "iso_3166_2", "type"],
+    "subunits": ["NAME", "SOVEREIGNT", "ADM0_A3", "TYPE"],
 }
 
 

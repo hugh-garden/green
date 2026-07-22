@@ -3,7 +3,18 @@
   --color-bg: #f2faf8;
   --color-ocean: #9ed4cd;
   --color-land-fill: #a8d8ae;
-  --color-land-stroke: #8fc09a;
+  --color-land-stroke: #5f9c74;
+  --color-region-line: #8fc09a;
   --color-coastline: #1b6358;
   --color-pin: #e8603c;
+  --color-pin-selected: #e8c23c;
+  --color-panel-bg: #ffffff;
+  --color-panel-border: #cfe8e2;
+  --color-text: #1b3a34;
+  --color-text-muted: #6b8b84;
+  --panel-width: 340px;
+  --font-family: 'Switzer', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-light: 300;
+  --font-weight-extralight: 200;
 }

@@ -1,6 +1,6 @@
 ## Sustainable Home Improvements Recommendations
 
-Built for myself, honestly.
+Built for myself.
 
 FastAPI + Vue + TS + deck.gl SPA.
 
@@ -14,6 +14,7 @@ AI-assisted for scaffolding and boilerplate. Hand-architected and carefully cons
 
 - [x] navigable globe
 - [x] pin drops
-- [ ] climate & related data
+- [x] climate & related data
 - [ ] competent analytics & recommendations
+- [ ] full-res geospatial data chunking
 - [ ] many more features

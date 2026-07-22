@@ -5,6 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "imagecodecs>=2026.6.26",
+    "numpy>=2.5.1",
     "pyshp>=3.1.4",
     "requests>=2.34.2",
+    "tifffile>=2026.7.14",
 ]
